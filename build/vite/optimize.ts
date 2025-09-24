@@ -1,6 +1,5 @@
 const include = [
   'axios',
-  'echarts',
   'lodash-es',
   'resize-detector',
   'vant/es',
@@ -27,7 +26,6 @@ const include = [
 ]
 
 const exclude = [
-  '@iconify-json/carbon',
 ]
 
 export { include, exclude }

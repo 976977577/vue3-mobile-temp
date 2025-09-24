@@ -1,16 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
-
 import type { EnhancedRouteLocation } from './types'
 import { useRouteCacheStore, useUserStore } from '@/stores'
 
 import { isLogin } from '@/utils/auth'
 import setPageTitle from '@/utils/set-page-title'
-
-NProgress.configure({ showSpinner: true, parent: '#app' })
 
 // 路由配置
 const routes: RouteRecordRaw[] = [
@@ -42,8 +37,6 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to: EnhancedRouteLocation) => {
-  NProgress.start()
-
   const routeCacheStore = useRouteCacheStore()
   const userStore = useUserStore()
 
@@ -58,7 +51,7 @@ router.beforeEach(async (to: EnhancedRouteLocation) => {
 })
 
 router.afterEach(() => {
-  NProgress.done()
+  // 路由切换完成
 })
 
 export default router
