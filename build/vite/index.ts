@@ -7,10 +7,14 @@ import { VantResolver } from '@vant/auto-import-resolver'
 import Components from 'unplugin-vue-components/vite'
 import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
 import VueDevTools from 'vite-plugin-vue-devtools'
+import progress from 'vite-plugin-progress'
 import { createViteVConsole } from './vconsole'
 
 export function createVitePlugins(mode: string) {
   return [
+    // https://github.com/jeddygong/vite-plugin-progress
+    progress(),
+
     vue(),
 
     // https://github.com/pengzhanbo/vite-plugin-mock-dev-server
