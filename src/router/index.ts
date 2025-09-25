@@ -9,8 +9,15 @@ import setPageTitle from '@/utils/set-page-title'
 
 // 路由配置
 const routes: RouteRecordRaw[] = [
-  // 所有基础页面已删除，路由配置已清空
-  // 可以在这里添加新的路由配置
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/pages/NotFound.vue'),
+    meta: {
+      title: '页面未找到',
+      keepAlive: false,
+    },
+  },
 ]
 
 const router = createRouter({
