@@ -9,6 +9,7 @@ import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import progress from 'vite-plugin-progress'
 import { createViteVConsole } from './vconsole'
+import { preloadErrorHandler } from './preload-error-handler'
 
 export function createVitePlugins(mode: string) {
   return [
@@ -58,6 +59,9 @@ export function createVitePlugins(mode: string) {
 
     // https://github.com/vadxq/vite-plugin-vconsole
     createViteVConsole(mode),
+
+    // 预加载错误处理插件
+    preloadErrorHandler(),
 
     // https://github.com/vuejs/devtools-next
     VueDevTools(),
