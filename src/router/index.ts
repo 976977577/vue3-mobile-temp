@@ -9,26 +9,8 @@ import setPageTitle from '@/utils/set-page-title'
 
 // 路由配置
 const routes: RouteRecordRaw[] = [
-  {
-    path: '/',
-    name: 'Home',
-    component: () => import('@/pages/index.vue'),
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/pages/login/index.vue'),
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    component: () => import('@/pages/register/index.vue'),
-  },
-  {
-    path: '/:pathMatch(.*)*',
-    name: 'NotFound',
-    component: () => import('@/pages/[...all].vue'),
-  },
+  // 所有基础页面已删除，路由配置已清空
+  // 可以在这里添加新的路由配置
 ]
 
 const router = createRouter({

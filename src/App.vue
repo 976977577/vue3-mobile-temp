@@ -36,20 +36,9 @@ const keepAliveRouteNames = computed(() => {
   <van-config-provider>
     <nav-bar />
     <router-view v-slot="{ Component }">
-      <section class="app-wrapper">
-        <keep-alive :include="keepAliveRouteNames as string[]">
-          <component :is="Component" />
-        </keep-alive>
-      </section>
+      <keep-alive :include="keepAliveRouteNames as string[]">
+        <component :is="Component" />
+      </keep-alive>
     </router-view>
-    <tab-bar />
   </van-config-provider>
 </template>
-
-<style scoped>
-.app-wrapper {
-  width: 100%;
-  position: relative;
-  padding: 16px;
-}
-</style>

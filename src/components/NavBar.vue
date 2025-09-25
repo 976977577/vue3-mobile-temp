@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { rootRouteList } from '@/config/routes'
 
 const route = useRoute()
 const router = useRouter()
@@ -11,10 +10,7 @@ const router = useRouter()
  */
 const title = computed(() => {
   const pageNames: Record<string, string> = {
-    Home: '首页',
-    Login: '登录',
-    Register: '注册',
-    NotFound: '404',
+    // 可以根据新的页面添加标题映射
   }
 
   if (route.name && typeof route.name === 'string') {
@@ -25,14 +21,11 @@ const title = computed(() => {
 })
 
 /**
- * Show the left arrow
- * If route name is in rootRouteList, hide left arrow
+ * 显示左箭头
+ * 由于 rootRouteList 已删除，默认显示返回箭头
  */
 const showLeftArrow = computed(() => {
-  if (route.name && rootRouteList.includes(route.name as string)) {
-    return false
-  }
-
+  // 可以根据需要自定义显示逻辑
   return true
 })
 
