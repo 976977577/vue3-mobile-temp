@@ -17,9 +17,4 @@ export default antfu(
       'perfectionist/sort-named-exports': 'off',
     },
   },
-  {
-    ignores: [
-      '.github/**',
-    ],
-  },
 )
