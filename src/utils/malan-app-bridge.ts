@@ -16,7 +16,7 @@ const PLATFORM_TYPE = {
 
 type PlatformType = (typeof PLATFORM_TYPE)[keyof typeof PLATFORM_TYPE]
 
-// 定义具体的回调函数类型
+// 回调函数类型
 type EventCallback = () => void
 type MethodCallback = (result: any, error?: string) => void
 type AndroidCallback = (result: any) => void
@@ -44,7 +44,7 @@ type ExtendedWindow = Window & {
 
 interface MethodConfig {
   name: string
-  hasCallback?: boolean
+  isSync?: boolean // true=同步，false=异步，默认为 false（异步）
   androidMethod?: string
 }
 
@@ -58,6 +58,11 @@ interface CallResult {
   success: boolean
   error?: string
   data?: any
+}
+
+interface CallOptions {
+  /** 是否为同步方法，true=同步，false=异步，未配置默认false */
+  isSync?: boolean
 }
 
 type AppEventName = (typeof APP_EVENT_NAMES)[number]
@@ -191,7 +196,7 @@ class MalanAppBridge {
   private registerAndroidMethod(methodName: string): void {
     const config: MethodConfig = {
       name: methodName,
-      hasCallback: false,
+      isSync: false, // 默认设置为异步模式
       androidMethod: methodName,
     }
 
@@ -227,9 +232,39 @@ class MalanAppBridge {
     configs.forEach(config => this.registerMethod(config))
   }
 
-  async callMethod(methodName: string, data?: any, callback?: MethodCallback): Promise<CallResult> {
+  // 函数重载定义
+  // 类型守卫：判断是否是 CallOptions
+  private isCallOptions(val: unknown): val is CallOptions {
+    return typeof val === 'object' && val !== null && 'isSync' in val
+  }
+
+  async callMethod(
+    methodName: string,
+    ...args: [(any | MethodCallback | CallOptions)?, (MethodCallback | CallOptions)?, CallOptions?]
+  ): Promise<CallResult> {
+    let data: any
+    let callback: MethodCallback | undefined
+    let finalOptions: CallOptions | undefined
+
+    // 参数解析
+    for (const arg of args) {
+      if (arg === undefined)
+        continue
+
+      if (typeof arg === 'function') {
+        callback = arg
+      }
+      else if (this.isCallOptions(arg)) {
+        finalOptions = arg
+      }
+      else {
+        data = arg
+      }
+    }
+
     let config = this.methodConfigs.get(methodName)
 
+    // 自动注册
     if (!config && this.config.autoDetect) {
       await this.tryRegisterMethod(methodName)
       config = this.methodConfigs.get(methodName)
@@ -239,6 +274,11 @@ class MalanAppBridge {
       const error = `Method ${methodName} not found`
       callback?.(null, error)
       return { success: false, error }
+    }
+
+    // 如果用户传了 isSync，则覆盖配置
+    if (finalOptions?.isSync !== undefined) {
+      config = { ...config, isSync: finalOptions.isSync }
     }
 
     return this.executeMethod(config, data, callback)
@@ -331,7 +371,9 @@ class MalanAppBridge {
 
         const jsonData = data ? JSON.stringify(data) : null
 
-        if (config.hasCallback && callback) {
+        const isAsync = !config.isSync
+
+        if (isAsync && callback) {
           win.androidCallback = (result: any) => {
             callback(result)
             resolve({ success: true, data: result })
@@ -387,4 +429,4 @@ const malanApp = new MalanAppBridge({ autoDetect: true })
 
 export default malanApp
 export { MalanAppBridge, PLATFORM_TYPE }
-export type { MethodConfig, CallResult, MalanAppConfig, AppEventName, PlatformType }
+export type { MethodConfig, CallResult, MalanAppConfig, AppEventName, PlatformType, CallOptions }
