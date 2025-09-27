@@ -21,25 +21,25 @@ export default ({ mode }: ConfigEnv): UserConfig => {
           target: '',
           ws: false,
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, ''),
-        },
-      },
+          rewrite: path => path.replace(/^\/api/, '')
+        }
+      }
     },
 
     resolve: {
       alias: {
         '@': path.join(__dirname, './src'),
         '~': path.join(__dirname, './src/assets'),
-        '~root': path.join(__dirname, '.'),
-      },
+        '~root': path.join(__dirname, '.')
+      }
     },
 
     build: {
       cssCodeSplit: false,
       chunkSizeWarningLimit: 2048,
-      outDir: env.VITE_APP_OUT_DIR || 'dist',
+      outDir: env.VITE_APP_OUT_DIR || 'dist'
     },
 
-    optimizeDeps: { include, exclude },
+    optimizeDeps: { include, exclude }
   }
 }

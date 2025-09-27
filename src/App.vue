@@ -9,20 +9,20 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: () => '基于 Vue 3 生态系统的移动端 Web 应用模板',
+      content: () => '基于 Vue 3 生态系统的移动端 Web 应用模板'
     },
     {
       name: 'theme-color',
-      content: () => '#ffffff',
-    },
+      content: () => '#ffffff'
+    }
   ],
   link: [
     {
       rel: 'icon',
       type: 'image/svg+xml',
-      href: () => '/favicon.svg',
-    },
-  ],
+      href: () => '/favicon.svg'
+    }
+  ]
 })
 
 const routeCacheStore = useRouteCacheStore()

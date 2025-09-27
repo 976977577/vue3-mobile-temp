@@ -9,7 +9,7 @@ export default (name?: string) => {
     Home: '首页',
     Login: '登录',
     Register: '注册',
-    NotFound: '404',
+    NotFound: '404'
   }
 
   const pageName = name && pageNames[name] ? pageNames[name] : name

@@ -7,7 +7,7 @@ const rootContainingBlockSelectorList = [
   '.van-popup--bottom',
   '.van-popup--top',
   '.van-popup--left',
-  '.van-popup--right',
+  '.van-popup--right'
   // 在这里添加你的选择器
 ]
 
@@ -21,7 +21,7 @@ export default {
       viewportWidth: 375,
       maxDisplayWidth: 600,
       border: true,
-      rootContainingBlockSelectorList,
-    },
-  },
+      rootContainingBlockSelectorList
+    }
+  }
 }
