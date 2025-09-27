@@ -5,21 +5,18 @@
 ## 特性
 
 - ⚡ [Vue 3](https://github.com/vuejs/core), [Vite](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/), [ESBuild](https://github.com/evanw/esbuild) - 就是快！
-- 🗂 [基于文件的路由](./src/pages)
 - 📦 [组件自动化加载](./src/components)
 - 🍍 [Pinia 状态管理](https://pinia.vuejs.org/)
-- 📑 [布局系统](./src/layouts)
-- 📲 [PWA](https://github.com/antfu/vite-plugin-pwa)
+- 📱 [Vant 4](https://vant-ui.github.io/vant/#/zh-CN) - 轻量、可靠的移动端组件库
+- 🌐 [Axios](https://axios-http.com/) - HTTP 客户端，支持请求/响应拦截
+- 📱 移动端适配 - 基于 viewport 的响应式设计
 - 🎨 [UnoCSS](https://github.com/antfu/unocss) - 高性能且极具灵活性的即时原子化 CSS 引擎
 - 😃 [各种图标集为你所用](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
-- 🌍 [I18n 国际化开箱即用](./locales)
-- 🗒 [Markdown 支持](https://github.com/antfu/vite-plugin-vue-markdown)
 - 🔥 使用 [新的 `<script setup>` 语法](https://github.com/vuejs/rfcs/pull/227)
 - 📥 [API 自动加载](https://github.com/antfu/unplugin-auto-import) - 直接使用 Composition API 无需引入
-- 🖨 利用 [vite-ssg](https://github.com/antfu/vite-ssg) 进行静态生成
 - 🦾 TypeScript, 当然
-- ⚙️ 结合 [Vitest](https://github.com/vitest-dev/vitest) 进行单元测试, [Cypress](https://cypress.io/) 进行 E2E 测试
-- ☁️ 零配置部署 Netlify
+- 🔧 [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/) - 代码规范和格式化
+- 🚀 多环境构建支持 - 开发/生产环境配置
 
 ## 环境要求
 
