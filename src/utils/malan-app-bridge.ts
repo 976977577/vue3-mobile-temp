@@ -5,13 +5,13 @@ const APP_EVENT_NAMES = [
   'enterActivated',
   'onPageShow',
   'shareSuccess',
-  'onWxOpenId',
+  'onWxOpenId'
 ] as const
 
 const PLATFORM_TYPE = {
   IOS: 'ios',
   ANDROID: 'android',
-  UNKNOWN: 'unknown',
+  UNKNOWN: 'unknown'
 } as const
 
 type PlatformType = (typeof PLATFORM_TYPE)[keyof typeof PLATFORM_TYPE]
@@ -117,7 +117,7 @@ class MalanAppBridge {
 
   private createPromiseWithCallback(
     executor: (resolve: (value: CallResult) => void, callback?: MethodCallback) => void,
-    callback?: MethodCallback,
+    callback?: MethodCallback
   ): Promise<CallResult> {
     return new Promise((resolve) => {
       executor(resolve, callback)
@@ -197,7 +197,7 @@ class MalanAppBridge {
     const config: MethodConfig = {
       name: methodName,
       isSync: false, // 默认设置为异步模式
-      androidMethod: methodName,
+      androidMethod: methodName
     }
 
     this.methodConfigs.set(methodName, config)
@@ -302,7 +302,7 @@ class MalanAppBridge {
   private async executeMethod(
     config: MethodConfig,
     data?: any,
-    callback?: MethodCallback,
+    callback?: MethodCallback
   ): Promise<CallResult> {
     switch (this.platformType) {
       case PLATFORM_TYPE.IOS: {
@@ -322,7 +322,7 @@ class MalanAppBridge {
   private async callIosMethod(
     config: MethodConfig,
     data?: any,
-    callback?: MethodCallback,
+    callback?: MethodCallback
   ): Promise<CallResult> {
     return this.createPromiseWithCallback((resolve, cb) => {
       this.setupWKWebViewJavascriptBridge((bridge) => {
@@ -347,7 +347,7 @@ class MalanAppBridge {
   private async callAndroidMethod(
     config: MethodConfig,
     data?: any,
-    callback?: MethodCallback,
+    callback?: MethodCallback
   ): Promise<CallResult> {
     return this.createPromiseWithCallback((resolve) => {
       const handleError = (error: string) => {
@@ -426,6 +426,16 @@ class MalanAppBridge {
 
 // 默认实例
 const malanApp = new MalanAppBridge({ autoDetect: true })
+
+// 自动挂载到 window 对象（只读）
+if (typeof window !== 'undefined' && !window.malanApp) {
+  Object.defineProperty(window, 'malanApp', {
+    value: malanApp,
+    writable: false,
+    configurable: false,
+    enumerable: true
+  })
+}
 
 export default malanApp
 export { MalanAppBridge, PLATFORM_TYPE }

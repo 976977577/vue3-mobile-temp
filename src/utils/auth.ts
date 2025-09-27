@@ -19,4 +19,11 @@ function clearToken() {
   token.value = null
 }
 
-export { isLogin, getToken, setToken, clearToken }
+function refreshToken(newToken?: string | null) {
+  if (newToken && newToken !== token.value) {
+    setToken(newToken)
+    window.malanApp.callHandler('refreshToken', { newToken })
+  }
+}
+
+export { isLogin, getToken, setToken, clearToken, refreshToken }
