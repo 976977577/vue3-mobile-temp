@@ -11,6 +11,7 @@
   "scripts": {
     "dev": "vite",
     "build:dev": "vue-tsc --noEmit && vite build --mode development",
+    "build:staging": "vue-tsc --noEmit && vite build --mode staging",
     "build:pro": "vue-tsc --noEmit && vite build --mode production",
     "preview": "vite preview",
     "lint": "eslint .",
