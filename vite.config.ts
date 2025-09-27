@@ -37,7 +37,9 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     build: {
       cssCodeSplit: false,
       chunkSizeWarningLimit: 2048,
-      outDir: env.VITE_APP_OUT_DIR || 'dist'
+      outDir: env.VITE_APP_OUT_DIR || 'dist',
+      minify: mode !== 'development',
+      reportCompressedSize: false
     },
 
     optimizeDeps: { include, exclude }
