@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useHead } from '@unhead/vue'
+import { useUrlSearchParams } from '@vueuse/core'
 
-import { useRouteCacheStore } from '@/stores'
+import { useRouteCacheStore, useUserStore } from '@/stores'
 import { appDescription, appName } from './constants'
+import { getToken, setToken } from '@/utils/auth'
 
 useHead({
   title: () => appName(),
@@ -27,9 +29,23 @@ useHead({
 })
 
 const routeCacheStore = useRouteCacheStore()
+const userStore = useUserStore()
 
 const keepAliveRouteNames = computed(() => {
   return routeCacheStore.routeCaches
+})
+
+onMounted(async () => {
+  const routeParam = useUrlSearchParams()
+
+  const token = routeParam.token as string
+  if (token) {
+    setToken(token)
+  }
+
+  if (token || getToken()) {
+    await userStore.refresh()
+  }
 })
 </script>
 
