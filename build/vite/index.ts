@@ -5,7 +5,7 @@ import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import { VantResolver } from '@vant/auto-import-resolver'
 import Components from 'unplugin-vue-components/vite'
-import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
+// import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import progress from 'vite-plugin-progress'
 import { bundleAnalyzer } from './bundle-analyzer'
@@ -20,7 +20,7 @@ export function createVitePlugins(mode: string) {
     vue(),
 
     // https://github.com/pengzhanbo/vite-plugin-mock-dev-server
-    mockDevServerPlugin(),
+    // mockDevServerPlugin(),
 
     // https://github.com/antfu/unplugin-vue-components
     Components({
