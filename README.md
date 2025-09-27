@@ -4,21 +4,22 @@
 
 ## 特性
 
-- ⚡️ [Vue 3](https://github.com/vuejs/core), [Vite 7](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/), [esbuild](https://github.com/evanw/esbuild) - 就是快！
-- 🗂 [基于文件的路由](./src/router)
+- ⚡ [Vue 3](https://github.com/vuejs/core), [Vite](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/), [ESBuild](https://github.com/evanw/esbuild) - 就是快！
+- 🗂 [基于文件的路由](./src/pages)
 - 📦 [组件自动化加载](./src/components)
-- 🍍 [使用 Pinia 的状态管理](https://pinia.vuejs.org)
+- 🍍 [Pinia 状态管理](https://pinia.vuejs.org/)
+- 📑 [布局系统](./src/layouts)
+- 📲 [PWA](https://github.com/antfu/vite-plugin-pwa)
 - 🎨 [UnoCSS](https://github.com/antfu/unocss) - 高性能且极具灵活性的即时原子化 CSS 引擎
+- 😃 [各种图标集为你所用](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
+- 🌍 [I18n 国际化开箱即用](./locales)
+- 🗒 [Markdown 支持](https://github.com/antfu/vite-plugin-vue-markdown)
 - 🔥 使用 [新的 `<script setup>` 语法](https://github.com/vuejs/rfcs/pull/227)
 - 📥 [API 自动加载](https://github.com/antfu/unplugin-auto-import) - 直接使用 Composition API 无需引入
-- 💪 TypeScript, 当然
-- 💾 [本地数据模拟](https://github.com/pengzhanbo/vite-plugin-mock-dev-server)的支持
-- 🌈 Git hooks - 提交代码 eslint 检测 和 提交规范检测
-- 🪶 [Vant](https://github.com/youzan/vant) - 移动端 Vue 组件库
-- 🔭 [vConsole](https://github.com/vadxq/vite-plugin-vconsole) - 移动端网页开发工具
-- 📱 浏览器适配 - 使用 viewport vw/vh 单位布局
-- 💻 [桌面端优化](https://github.com/wswmsword/postcss-mobile-forever) - 处理为移动端视图
-- 🛡️ 将 [ESM](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) 设为默认
+- 🖨 利用 [vite-ssg](https://github.com/antfu/vite-ssg) 进行静态生成
+- 🦾 TypeScript, 当然
+- ⚙️ 结合 [Vitest](https://github.com/vitest-dev/vitest) 进行单元测试, [Cypress](https://cypress.io/) 进行 E2E 测试
+- ☁️ 零配置部署 Netlify
 
 ## 环境要求
 
