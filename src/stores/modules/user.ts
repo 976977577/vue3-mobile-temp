@@ -1,78 +1,48 @@
-import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { LoginData, RegisterData, UserState } from '@/api/user'
-import { clearToken, setToken } from '@/utils/auth'
+import { queryUserInfo } from '@/api/user'
+import { defineStore } from 'pinia'
 
-import {
-  getUserInfo,
-  login as userLogin,
-  logout as userLogout,
-  register as userRegister
-} from '@/api/user'
-
-const InitUserInfo = {
-  uid: 0,
-  nickname: '',
-  avatar: ''
+export interface UserState {
+  id: string
+  nickname: string
+  headerImg: string
+  isReal: boolean
+  goldCoins: number
+  phone: string
+  invitationCode: string
+  isMemberTeacher: boolean
+  createTime: string
+  [key: string]: any
 }
 
-export const useUserStore = defineStore('user', () => {
-  const userInfo = ref<UserState>({ ...InitUserInfo })
+const initUserInfo = {
+  id: '',
+  nickname: '',
+  headerImg: '',
+  isReal: false,
+  goldCoins: 0,
+  phone: '',
+  invitationCode: '',
+  isMemberTeacher: false,
+  createTime: ''
+}
 
-  // Set user's information
-  const setInfo = (partial: Partial<UserState>) => {
-    userInfo.value = { ...partial }
-  }
+export const useUserStore = defineStore(
+  'user',
+  () => {
+    const userInfo = ref<UserState>({ ...initUserInfo })
 
-  const login = async (loginForm: LoginData) => {
-    try {
-      const { data } = await userLogin(loginForm)
-      setToken(data.token)
+    const setInfo = (partial: Partial<UserState>) => {
+      userInfo.value = { ...userInfo.value, ...partial }
     }
-    catch (error) {
-      clearToken()
-      throw error
-    }
-  }
 
-  const info = async () => {
-    try {
-      const { data } = await getUserInfo()
+    const refresh = async () => {
+      const { data } = await queryUserInfo()
       setInfo(data)
     }
-    catch (error) {
-      clearToken()
-      throw error
-    }
+    return { userInfo, setInfo, refresh }
+  },
+  {
+    persist: true
   }
-
-  const logout = async () => {
-    try {
-      await userLogout()
-    }
-    finally {
-      clearToken()
-      setInfo({ ...InitUserInfo })
-    }
-  }
-
-  const register = async (data: RegisterData) => {
-    try {
-      const result = await userRegister(data)
-      return result
-    }
-    catch {}
-  }
-
-  return {
-    userInfo,
-    info,
-    login,
-    logout,
-    register
-  }
-}, {
-  persist: true
-})
-
-export default useUserStore
+)
