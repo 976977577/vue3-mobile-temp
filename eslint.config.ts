@@ -8,7 +8,7 @@ export default antfu(
     // Enable UnoCSS support
     // https://unocss.dev/integrations/vscode
     unocss: true,
-    formatters: true,
+    formatters: true
   },
   {
     rules: {
@@ -16,6 +16,7 @@ export default antfu(
       'perfectionist/sort-exports': 'off',
       'perfectionist/sort-named-exports': 'off',
       'no-console': 'off',
-    },
-  },
+      '@stylistic/comma-dangle': ['error', 'never']
+    }
+  }
 )

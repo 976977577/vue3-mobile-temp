@@ -27,7 +27,7 @@ export function createVitePlugins(mode: string) {
       extensions: ['vue'],
       resolvers: [VantResolver()],
       include: [/\.vue$/, /\.vue\?vue/],
-      dts: 'src/types/components.d.ts',
+      dts: 'src/types/components.d.ts'
     }),
 
     // https://github.com/antfu/unplugin-auto-import
@@ -35,23 +35,23 @@ export function createVitePlugins(mode: string) {
       include: [
         /\.[tj]sx?$/,
         /\.vue$/,
-        /\.vue\?vue/,
+        /\.vue\?vue/
       ],
       imports: [
         'vue',
         '@vueuse/core',
         'vue-router',
-        unheadVueComposablesImports,
+        unheadVueComposablesImports
       ],
       dts: 'src/types/auto-imports.d.ts',
       dirs: [
-        'src/composables',
+        'src/composables'
       ],
-      resolvers: [VantResolver()],
+      resolvers: [VantResolver()]
     }),
 
     legacy({
-      targets: ['defaults', 'not IE 11'],
+      targets: ['defaults', 'not IE 11']
     }),
 
     // https://github.com/antfu/unocss
@@ -68,6 +68,6 @@ export function createVitePlugins(mode: string) {
     VueDevTools(),
 
     // 打包产物大小分析插件
-    bundleAnalyzer(),
+    bundleAnalyzer()
   ]
 }

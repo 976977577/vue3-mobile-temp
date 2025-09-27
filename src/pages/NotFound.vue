@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router'
 
 // 页面元数据
 defineOptions({
-  name: 'NotFound',
+  name: 'NotFound'
 })
 
 const router = useRouter()

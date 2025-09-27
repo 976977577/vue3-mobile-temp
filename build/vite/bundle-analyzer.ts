@@ -51,7 +51,7 @@ export function bundleAnalyzer(): Plugin {
           files.push({
             name: relativePath,
             size,
-            type,
+            type
           })
         }
       })
@@ -127,6 +127,6 @@ export function bundleAnalyzer(): Plugin {
           analyzeBundleSize()
         }, 100)
       }
-    },
+    }
   }
 }

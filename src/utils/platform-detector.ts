@@ -68,7 +68,7 @@ export class PlatformDetector {
       isMobile: PlatformDetector.isMobile(),
       isDesktop: PlatformDetector.isDesktop(),
       platform: PlatformDetector.getPlatform(),
-      userAgent: PlatformDetector.getUserAgent(),
+      userAgent: PlatformDetector.getUserAgent()
     }
   }
 }

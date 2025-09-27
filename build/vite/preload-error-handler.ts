@@ -15,7 +15,7 @@ export function preloadErrorHandler(): Plugin {
         loader: 'ts',
         target: 'es2015',
         minify: true,
-        format: 'iife',
+        format: 'iife'
       })
 
       const scriptTag = `<script>${result.code}</script>\n`
@@ -24,6 +24,6 @@ export function preloadErrorHandler(): Plugin {
         return html.slice(0, headEndIndex) + scriptTag + html.slice(headEndIndex)
       }
       return html
-    },
+    }
   }
 }

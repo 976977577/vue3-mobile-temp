@@ -7,13 +7,13 @@ import {
   getUserInfo,
   login as userLogin,
   logout as userLogout,
-  register as userRegister,
+  register as userRegister
 } from '@/api/user'
 
 const InitUserInfo = {
   uid: 0,
   nickname: '',
-  avatar: '',
+  avatar: ''
 }
 
 export const useUserStore = defineStore('user', () => {
@@ -69,10 +69,10 @@ export const useUserStore = defineStore('user', () => {
     info,
     login,
     logout,
-    register,
+    register
   }
 }, {
-  persist: true,
+  persist: true
 })
 
 export default useUserStore

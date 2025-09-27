@@ -16,7 +16,7 @@ const useRouteCacheStore = defineStore('route-cache', () => {
 
   return {
     routeCaches,
-    addRoute,
+    addRoute
   }
 })
 

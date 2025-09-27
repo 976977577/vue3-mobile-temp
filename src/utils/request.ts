@@ -13,7 +13,7 @@ export const REQUEST_TOKEN_KEY = 'Access-Token'
 const request = axios.create({
   // API 请求的默认前缀
   baseURL: import.meta.env.VITE_APP_API_BASE_URL,
-  timeout: 6000, // 请求超时时间
+  timeout: 6000 // 请求超时时间
 })
 
 export type RequestError = AxiosError<{
@@ -30,14 +30,14 @@ function errorHandler(error: RequestError): Promise<any> {
     if (status === 403) {
       showNotify({
         type: 'danger',
-        message: (data && data.message) || statusText,
+        message: (data && data.message) || statusText
       })
     }
     // 401 未登录/未授权
     if (status === 401 && data.result && data.result.isLogin) {
       showNotify({
         type: 'danger',
-        message: 'Authorization verification failed',
+        message: 'Authorization verification failed'
       })
       // 如果你需要直接跳转登录页面
       // location.replace(loginRoutePath)

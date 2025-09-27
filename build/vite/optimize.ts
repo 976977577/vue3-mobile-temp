@@ -20,7 +20,7 @@ const include = [
   'vant/es/tabbar/style/index',
   'vant/es/tabbar-item/style/index',
   'vant/es/list/style/index',
-  'vant/es/text-ellipsis/style/index',
+  'vant/es/text-ellipsis/style/index'
 ]
 
 const exclude = [

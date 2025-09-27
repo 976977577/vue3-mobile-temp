@@ -15,14 +15,14 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/NotFound.vue'),
     meta: {
       title: '页面未找到',
-      keepAlive: false,
-    },
-  },
+      keepAlive: false
+    }
+  }
 ]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_APP_PUBLIC_PATH),
-  routes,
+  routes
 })
 
 router.beforeEach(async (to: EnhancedRouteLocation) => {
