@@ -15,15 +15,15 @@ export default ({ mode }: ConfigEnv): UserConfig => {
 
     server: {
       host: true,
-      port: 3000,
-      proxy: {
-        '/api': {
-          target: '',
-          ws: false,
-          changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, '')
-        }
-      }
+      port: 3000
+      // proxy: {
+      //   '/api': {
+      //     target: '',
+      //     ws: false,
+      //     changeOrigin: true,
+      //     rewrite: path => path.replace(/^\/api/, '')
+      //   }
+      // }
     },
 
     resolve: {
