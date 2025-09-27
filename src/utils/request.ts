@@ -13,7 +13,7 @@ export type RequestError = AxiosError<{
 
 const request = axios.create({
   baseURL: import.meta.env.VITE_APP_API_BASE_URL,
-  timeout: 6000
+  timeout: 10000
 })
 
 function getErrorMessage(error: RequestError, fallback: string): string {
@@ -46,6 +46,22 @@ function checkAndRefreshToken(headers: any): void {
 }
 
 function errorHandler(error: RequestError): Promise<never> {
+  if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+    showNotify({
+      type: 'danger',
+      message: '请求超时，请检查网络连接后重试'
+    })
+    return Promise.reject(error)
+  }
+
+  if (!error.response) {
+    showNotify({
+      type: 'danger',
+      message: '网络连接失败，请检查网络设置'
+    })
+    return Promise.reject(error)
+  }
+
   const { status, headers, data } = error.response
   checkAndRefreshToken(headers)
 
