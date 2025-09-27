@@ -1,2 +1,2 @@
-export const appName = () => 'Vue3 Vant Mobile'
-export const appDescription = () => '基于 Vue 3 生态系统的移动端 Web 应用模板'
+export const appName = () => '马兰花开 你的学习搭子'
+export const appDescription = () => '知识变现良师益友社交'

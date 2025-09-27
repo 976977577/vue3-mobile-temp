@@ -3,13 +3,14 @@ import { computed } from 'vue'
 import { useHead } from '@unhead/vue'
 
 import { useRouteCacheStore } from '@/stores'
+import { appDescription, appName } from './constants'
 
 useHead({
-  title: () => 'Vue3 Vant Mobile',
+  title: () => appName(),
   meta: [
     {
       name: 'description',
-      content: () => '基于 Vue 3 生态系统的移动端 Web 应用模板'
+      content: () => appDescription()
     },
     {
       name: 'theme-color',
