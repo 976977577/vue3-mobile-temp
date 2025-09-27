@@ -8,6 +8,7 @@ import Components from 'unplugin-vue-components/vite'
 import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import progress from 'vite-plugin-progress'
+import { bundleAnalyzer } from './bundle-analyzer'
 import { createViteVConsole } from './vconsole'
 import { preloadErrorHandler } from './preload-error-handler'
 
@@ -65,5 +66,8 @@ export function createVitePlugins(mode: string) {
 
     // https://github.com/vuejs/devtools-next
     VueDevTools(),
+
+    // 打包产物大小分析插件
+    bundleAnalyzer(),
   ]
 }
