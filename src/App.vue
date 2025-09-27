@@ -3,7 +3,7 @@ import { computed, onMounted } from 'vue'
 import { useHead } from '@unhead/vue'
 import { useUrlSearchParams } from '@vueuse/core'
 
-import { useRouteCacheStore, useUserStore } from '@/stores'
+import { useAppStore, useRouteCacheStore, useUserStore } from '@/stores'
 import { appDescription, appName } from './constants'
 import { getToken, setToken } from '@/utils/auth'
 
@@ -30,6 +30,7 @@ useHead({
 
 const routeCacheStore = useRouteCacheStore()
 const userStore = useUserStore()
+const appStore = useAppStore()
 
 const keepAliveRouteNames = computed(() => {
   return routeCacheStore.routeCaches
@@ -47,6 +48,8 @@ onMounted(async () => {
     if (token || getToken()) {
       await userStore.refresh()
     }
+
+    appStore.initAppInfo()
   }
   catch (error) {
     console.error('App mounted 钩子执行失败:', error)

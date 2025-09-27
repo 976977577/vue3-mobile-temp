@@ -232,8 +232,6 @@ class MalanAppBridge {
     configs.forEach(config => this.registerMethod(config))
   }
 
-  // 函数重载定义
-  // 类型守卫：判断是否是 CallOptions
   private isCallOptions(val: unknown): val is CallOptions {
     return typeof val === 'object' && val !== null && 'isSync' in val
   }

@@ -3,6 +3,7 @@ import axios from 'axios'
 import { showNotify } from 'vant'
 import { STORAGE_TOKEN_KEY } from '@/stores/mutation-type'
 import { refreshToken } from '@/utils/auth'
+import { useAppStore } from '@/stores'
 
 export type RequestError = AxiosError<{
   message?: string
@@ -104,9 +105,12 @@ function errorHandler(error: RequestError): Promise<never> {
 
 function requestHandler(config: InternalAxiosRequestConfig): InternalAxiosRequestConfig {
   const savedToken = localStorage.getItem(STORAGE_TOKEN_KEY)
+  const appStore = useAppStore()
 
   config.headers.tenantId = 'mledu'
   config.headers.orgCode = 'mleduorg'
+  config.headers.version = appStore.appInfo.version
+  config.headers.client = appStore.appInfo.client
 
   if (savedToken) {
     config.headers.Authorization = savedToken
