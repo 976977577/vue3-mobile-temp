@@ -36,15 +36,20 @@ const keepAliveRouteNames = computed(() => {
 })
 
 onMounted(async () => {
-  const routeParam = useUrlSearchParams()
+  try {
+    const routeParam = useUrlSearchParams()
 
-  const token = routeParam.token as string
-  if (token) {
-    setToken(token)
+    const token = routeParam.token as string
+    if (token) {
+      setToken(token)
+    }
+
+    if (token || getToken()) {
+      await userStore.refresh()
+    }
   }
-
-  if (token || getToken()) {
-    await userStore.refresh()
+  catch (error) {
+    console.error('App mounted 钩子执行失败:', error)
   }
 })
 </script>

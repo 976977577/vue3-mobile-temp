@@ -27,7 +27,7 @@ const initUserInfo = {
   createTime: ''
 }
 
-export const useUserStore = defineStore(
+const useUserStore = defineStore(
   'user',
   () => {
     const userInfo = ref<UserState>({ ...initUserInfo })
@@ -46,3 +46,4 @@ export const useUserStore = defineStore(
     persist: true
   }
 )
+export default useUserStore
