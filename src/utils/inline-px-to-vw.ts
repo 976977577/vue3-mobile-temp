@@ -2,7 +2,6 @@
  * 支持行内样式 px 转 vw
  * 本文件代码来自于 scale-view 开源项目
  * 源代码链接：https://github.com/wswmsword/scale-view
- * 非常感谢作者 @wswmsword 的支持
  */
 
 // 理想宽度，设计稿的宽度
