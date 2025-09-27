@@ -424,7 +424,7 @@ class MalanAppBridge {
   }
 }
 
-// 默认实例（开箱即用）
+// 默认实例
 const malanApp = new MalanAppBridge({ autoDetect: true })
 
 export default malanApp
