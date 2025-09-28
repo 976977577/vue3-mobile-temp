@@ -169,11 +169,9 @@ class MalanAppBridge {
     }
   }
 
-  // 直接执行方法调用（不通过队列）
   private async executeMethodDirectly(queueItem: QueueItem): Promise<void> {
     const { id, config, data, callback, resolve } = queueItem
 
-    // 将回调信息存储到映射中
     if (callback || !config.isSync) {
       this.callbackMap.set(id, {
         callback,
