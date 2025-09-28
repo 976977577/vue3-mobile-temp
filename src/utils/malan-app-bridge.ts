@@ -236,9 +236,17 @@ class MalanAppBridge {
     return typeof val === 'object' && val !== null && 'isSync' in val
   }
 
+  callMethod(methodName: string): Promise<CallResult>
+  callMethod(methodName: string, data: any): Promise<CallResult>
+  callMethod(methodName: string, callback: MethodCallback): Promise<CallResult>
+  callMethod(methodName: string, options: CallOptions): Promise<CallResult>
+  callMethod(methodName: string, data: any, callback: MethodCallback): Promise<CallResult>
+  callMethod(methodName: string, data: any, options: CallOptions): Promise<CallResult>
+  callMethod(methodName: string, callback: MethodCallback, options: CallOptions): Promise<CallResult>
+  callMethod(methodName: string, data: any, callback: MethodCallback, options: CallOptions): Promise<CallResult>
   async callMethod(
     methodName: string,
-    ...args: [(any | MethodCallback | CallOptions)?, (MethodCallback | CallOptions)?, CallOptions?]
+    ...args: [any?, MethodCallback?, CallOptions?]
   ): Promise<CallResult> {
     let data: any
     let callback: MethodCallback | undefined
@@ -262,7 +270,6 @@ class MalanAppBridge {
 
     let config = this.methodConfigs.get(methodName)
 
-    // 自动注册
     if (!config && this.config.autoDetect) {
       await this.tryRegisterMethod(methodName)
       config = this.methodConfigs.get(methodName)
@@ -274,7 +281,6 @@ class MalanAppBridge {
       return { success: false, error }
     }
 
-    // 如果用户传了 isSync，则覆盖配置
     if (finalOptions?.isSync !== undefined) {
       config = { ...config, isSync: finalOptions.isSync }
     }
@@ -367,22 +373,27 @@ class MalanAppBridge {
           return handleError(`Android method ${actualMethodName} not found`)
         }
 
-        const jsonData = data ? JSON.stringify(data) : null
+        const hasPayload = data !== undefined && data !== null
+        const jsonData = hasPayload ? JSON.stringify(data) : undefined
+        const invoke = () => (hasPayload ? androidMethod(jsonData) : androidMethod())
 
-        const isAsync = !config.isSync
-
-        if (isAsync && callback) {
-          win.androidCallback = (result: any) => {
-            callback(result)
-            resolve({ success: true, data: result })
-          }
-          androidMethod(jsonData)
+        if (config.isSync) {
+          const result = invoke()
+          callback?.(result)
+          resolve({ success: true, data: result })
           return
         }
 
-        const result = androidMethod(jsonData)
-        callback?.(result)
-        resolve({ success: true, data: result })
+        if (callback) {
+          win.androidCallback = (result: any) => {
+            callback?.(result)
+            resolve({ success: true, data: result })
+          }
+        }
+        else {
+          resolve({ success: true })
+        }
+        invoke()
       }
       catch (error) {
         const errorMsg = error instanceof Error ? error.message : String(error)
