@@ -42,11 +42,11 @@ const useAppStore = defineStore(
           return appInfo.value
         }
         else {
-          throw new Error(result.error || '初始化 App 信息失败')
+          throw new Error(result.error || '初始化 App版本 信息失败！')
         }
       }
       catch (error) {
-        throw new Error(`初始化 App 信息失败: ${error}`)
+        throw new Error(`初始化 App版本 信息失败！: ${error}`)
       }
     }
 

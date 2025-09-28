@@ -16,7 +16,6 @@ const PLATFORM_TYPE = {
 
 type PlatformType = (typeof PLATFORM_TYPE)[keyof typeof PLATFORM_TYPE]
 
-// 回调函数类型
 type EventCallback = () => void
 type MethodCallback = (result: any, error?: string) => void
 type AndroidCallback = (result: any) => void
@@ -44,17 +43,18 @@ type ExtendedWindow = Window & {
 
 interface MethodConfig {
   name: string
-  isSync?: boolean // true=同步，false=异步，默认为 false（异步）
-  androidMethod?: string
+  isSync?: boolean
+  nativeMethod?: string
 }
 
 interface MalanAppConfig {
   methods?: MethodConfig[]
   debug?: boolean
   autoDetect?: boolean
+  queueTimeout?: number
 }
 
-interface CallResult {
+interface MethodResult {
   success: boolean
   error?: string
   data?: any
@@ -62,6 +62,22 @@ interface CallResult {
 
 interface CallOptions {
   isSync?: boolean
+}
+
+interface QueueItem {
+  id: string
+  methodName: string
+  config: MethodConfig
+  data?: any
+  callback?: MethodCallback
+  resolve: (value: MethodResult) => void
+  timestamp: number
+}
+
+interface CallbackInfo {
+  callback?: MethodCallback
+  resolve: (value: MethodResult) => void
+  timestamp: number
 }
 
 type AppEventName = (typeof APP_EVENT_NAMES)[number]
@@ -73,9 +89,16 @@ class MalanAppBridge {
   private debug: boolean = false
   private platformType: PlatformType
 
+  private callQueue: QueueItem[] = []
+  private callbackMap: Map<string, CallbackInfo> = new Map()
+  private isProcessing: boolean = false
+  private callIdCounter: number = 0
+  private queueTimeout: number = 60000
+
   constructor(config: MalanAppConfig = {}) {
     this.config = { autoDetect: true, ...config }
     this.debug = config.debug || false
+    this.queueTimeout = config.queueTimeout || 60000
     this.platformType = this.detectPlatform()
     this.init()
   }
@@ -98,6 +121,216 @@ class MalanAppBridge {
     console.error(`[MalanApp] 😭 ${message}`, error)
   }
 
+  // 生成唯一的调用 ID
+  private generateCallId(): string {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+      return crypto.randomUUID()
+    }
+    return `call_${++this.callIdCounter}_${Date.now()}`
+  }
+
+  // 清理超时的回调
+  private cleanupTimeoutCallbacks(): void {
+    const now = Date.now()
+    const timeoutCallbacks: string[] = []
+
+    this.callbackMap.forEach((info, callId) => {
+      if (now - info.timestamp > this.queueTimeout) {
+        timeoutCallbacks.push(callId)
+      }
+    })
+
+    timeoutCallbacks.forEach((callId) => {
+      const info = this.callbackMap.get(callId)
+      if (info) {
+        info.callback?.(null, 'Call timeout')
+        info.resolve({ success: false, error: 'Call timeout' })
+        this.callbackMap.delete(callId)
+      }
+    })
+  }
+
+  private async processNextInQueue(): Promise<void> {
+    if (this.isProcessing || this.callQueue.length === 0) {
+      return
+    }
+
+    this.isProcessing = true
+
+    try {
+      // 清理超时的回调
+      this.cleanupTimeoutCallbacks()
+
+      const queueItem = this.callQueue.shift()
+      if (!queueItem) {
+        this.isProcessing = false
+        return
+      }
+
+      await this.executeMethodDirectly(queueItem)
+    }
+    catch (error) {
+      this.logError('队列处理错误:', error)
+    }
+    finally {
+      this.isProcessing = false
+      queueMicrotask(() => this.processNextInQueue())
+    }
+  }
+
+  // 直接执行方法调用（不通过队列）
+  private async executeMethodDirectly(queueItem: QueueItem): Promise<void> {
+    const { id, config, data, callback, resolve } = queueItem
+
+    // 将回调信息存储到映射中
+    if (callback || !config.isSync) {
+      this.callbackMap.set(id, {
+        callback,
+        resolve,
+        timestamp: Date.now()
+      })
+    }
+
+    try {
+      switch (this.platformType) {
+        case PLATFORM_TYPE.IOS: {
+          await this.callIosMethodDirectly(id, config, data)
+          break
+        }
+        case PLATFORM_TYPE.ANDROID: {
+          await this.callAndroidMethodDirectly(id, config, data)
+          break
+        }
+        default: {
+          const error = 'Not in app environment'
+          callback?.(null, error)
+          resolve({ success: false, error })
+          this.callbackMap.delete(id)
+        }
+      }
+    }
+    catch (error) {
+      const errorMsg = error instanceof Error ? error.message : String(error)
+      this.logError(`方法调用失败: ${config.name}`, error)
+      callback?.(null, errorMsg)
+      resolve({ success: false, error: errorMsg })
+      this.callbackMap.delete(id)
+    }
+  }
+
+  // iOS 平台直接调用
+  private async callIosMethodDirectly(
+    callId: string,
+    config: MethodConfig,
+    data?: any
+  ): Promise<void> {
+    this.setupWKWebViewJavascriptBridge((bridge) => {
+      try {
+        if (config.isSync) {
+          const result = bridge.callHandler(config.name, data, () => {})
+          this.handleMethodResult(callId, result)
+        }
+        else {
+          bridge.callHandler(config.name, data, (result: any) => {
+            this.handleMethodResult(callId, result)
+          })
+        }
+      }
+      catch (error) {
+        this.handleMethodError(callId, error)
+      }
+    })
+  }
+
+  // Android 平台直接调用
+  private async callAndroidMethodDirectly(
+    callId: string,
+    config: MethodConfig,
+    data?: any
+  ): Promise<void> {
+    const win = window as unknown as ExtendedWindow
+    const androidObj = win.fromAndroid
+
+    if (!androidObj) {
+      this.handleMethodError(callId, 'Android bridge not available')
+      return
+    }
+
+    const actualMethodName = config.nativeMethod || config.name
+
+    if (!androidObj[actualMethodName] || typeof androidObj[actualMethodName] !== 'function') {
+      this.handleMethodError(callId, `Android method ${actualMethodName} not found`)
+      return
+    }
+
+    const hasPayload = data !== undefined && data !== null
+    const jsonData = hasPayload ? JSON.stringify(data) : undefined
+
+    if (config.isSync) {
+      try {
+        const result = hasPayload ? androidObj[actualMethodName](jsonData) : androidObj[actualMethodName]()
+        this.handleMethodResult(callId, result)
+      }
+      catch (error) {
+        this.handleMethodError(callId, error)
+      }
+      return
+    }
+
+    win.androidCallback = (result: any) => {
+      this.handleMethodResult(callId, result)
+      win.androidCallback = () => {}
+    }
+
+    try {
+      if (hasPayload) {
+        androidObj[actualMethodName](jsonData)
+      }
+      else {
+        androidObj[actualMethodName]()
+      }
+    }
+    catch (error) {
+      this.handleMethodError(callId, error)
+      win.androidCallback = () => {} // 清理回调
+    }
+  }
+
+  // 处理方法调用结果
+  private handleMethodResult(callId: string, result: any): void {
+    const callbackInfo = this.callbackMap.get(callId)
+    if (!callbackInfo)
+      return
+
+    let parsedResult = result
+    if (typeof result === 'string' && result.length >= 2) {
+      try {
+        const parsed = JSON.parse(parsedResult)
+        if (parsed !== null && typeof parsed === 'object') {
+          parsedResult = parsed
+        }
+      }
+      catch {}
+    }
+    callbackInfo.callback?.(parsedResult)
+    callbackInfo.resolve({ success: true, data: parsedResult })
+    this.callbackMap.delete(callId)
+  }
+
+  // 处理方法调用错误
+  private handleMethodError(callId: string, error: any): void {
+    const callbackInfo = this.callbackMap.get(callId)
+    if (!callbackInfo) {
+      return
+    }
+
+    const errorMsg = error instanceof Error ? error.message : String(error)
+
+    callbackInfo.callback?.(null, errorMsg)
+    callbackInfo.resolve({ success: false, error: errorMsg })
+    this.callbackMap.delete(callId)
+  }
+
   private setupWKWebViewJavascriptBridge(callback: BridgeCallback): void {
     const win = window as unknown as ExtendedWindow
 
@@ -114,21 +347,13 @@ class MalanAppBridge {
     win.webkit?.messageHandlers.iOS_Native_InjectJavascript.postMessage(null)
   }
 
-  private createPromiseWithCallback(
-    executor: (resolve: (value: CallResult) => void, callback?: MethodCallback) => void,
-    callback?: MethodCallback
-  ): Promise<CallResult> {
-    return new Promise((resolve) => {
-      executor(resolve, callback)
-    })
-  }
-
   private init(): void {
     this.initGlobalObjects()
     this.initEvents()
 
+    // 自动检测并注册方法(安卓生效)
     if (this.config.autoDetect) {
-      this.autoDetectMethods()
+      this.registerMethods()
     }
 
     if (!this.config.methods)
@@ -142,7 +367,7 @@ class MalanAppBridge {
   private initGlobalObjects(): void {
     if (typeof window === 'undefined')
       return
-    console.log('[MalanApp] 初始化全局对象')
+
     const win = window as unknown as ExtendedWindow
     win.fromWeb = win.fromWeb || {}
     win.androidCallback = win.androidCallback || (() => {})
@@ -171,14 +396,7 @@ class MalanAppBridge {
     })
   }
 
-  private autoDetectMethods(): void {
-    if (this.platformType !== PLATFORM_TYPE.ANDROID)
-      return
-
-    this.registerAndroidMethods()
-  }
-
-  private registerAndroidMethods(): void {
+  private registerMethods(): void {
     const win = window as unknown as ExtendedWindow
     const androidObj = win.fromAndroid
     if (!androidObj)
@@ -191,15 +409,15 @@ class MalanAppBridge {
     if (!methodNames.length)
       return
 
-    methodNames.forEach(name => this.registerAndroidMethod(name))
+    methodNames.forEach(name => this.registerMethod(name))
     this.log('检测到 Android 方法', methodNames.length, '个:', methodNames)
   }
 
-  private registerAndroidMethod(methodName: string): void {
+  private registerMethod(methodName: string): void {
     const config: MethodConfig = {
       name: methodName,
-      isSync: false, // 默认设置为异步模式
-      androidMethod: methodName
+      isSync: false,
+      nativeMethod: methodName
     }
 
     this.methodConfigs.set(methodName, config)
@@ -225,37 +443,29 @@ class MalanAppBridge {
     callbacks.delete(callback)
   }
 
-  registerMethod(config: MethodConfig): void {
-    this.methodConfigs.set(config.name, config)
-  }
-
-  registerMethods(configs: MethodConfig[]): void {
-    configs.forEach(config => this.registerMethod(config))
-  }
-
   private isCallOptions(val: unknown): val is CallOptions {
     return typeof val === 'object' && val !== null && 'isSync' in val
   }
 
-  callMethod(methodName: string): Promise<CallResult>
-  callMethod<T>(methodName: string, data: T): Promise<CallResult>
-  callMethod(methodName: string, callback: MethodCallback): Promise<CallResult>
-  callMethod(methodName: string, options: CallOptions): Promise<CallResult>
-  callMethod<T>(methodName: string, data: T, callback: MethodCallback): Promise<CallResult>
-  callMethod<T>(methodName: string, data: T, options: CallOptions): Promise<CallResult>
-  callMethod(methodName: string, callback: MethodCallback, options: CallOptions): Promise<CallResult>
+  callMethod(methodName: string): Promise<MethodResult>
+  callMethod<T>(methodName: string, data: T): Promise<MethodResult>
+  callMethod(methodName: string, callback: MethodCallback): Promise<MethodResult>
+  callMethod(methodName: string, options: CallOptions): Promise<MethodResult>
+  callMethod<T>(methodName: string, data: T, callback: MethodCallback): Promise<MethodResult>
+  callMethod<T>(methodName: string, data: T, options: CallOptions): Promise<MethodResult>
+  callMethod(methodName: string, callback: MethodCallback, options: CallOptions): Promise<MethodResult>
   callMethod<T>(
     methodName: string,
     data: T,
     callback: MethodCallback,
     options: CallOptions
-  ): Promise<CallResult>
+  ): Promise<MethodResult>
   async callMethod(
     methodName: string,
     dataOrCallbackOrOptions?: any | MethodCallback | CallOptions,
     callbackOrOptions?: MethodCallback | CallOptions,
     options?: CallOptions
-  ): Promise<CallResult> {
+  ): Promise<MethodResult> {
     let data: any
     let callback: MethodCallback | undefined
     let finalOptions: CallOptions | undefined
@@ -292,134 +502,56 @@ class MalanAppBridge {
     if (finalOptions?.isSync !== undefined) {
       config = { ...config, isSync: finalOptions.isSync }
     }
+    return this.executeMethodWithQueue(methodName, config, data, callback)
+  }
 
-    return this.executeMethod(config, data, callback)
+  private executeMethodWithQueue(
+    methodName: string,
+    config: MethodConfig,
+    data?: any,
+    callback?: MethodCallback
+  ): Promise<MethodResult> {
+    return new Promise((resolve) => {
+      const callId = this.generateCallId()
+
+      const queueItem: QueueItem = {
+        id: callId,
+        methodName,
+        config,
+        data,
+        callback,
+        resolve,
+        timestamp: Date.now()
+      }
+
+      this.callQueue.push(queueItem)
+
+      this.processNextInQueue()
+    })
   }
 
   callHandler = this.callMethod
 
   private async tryRegisterMethod(methodName: string): Promise<void> {
-    if (this.platformType !== PLATFORM_TYPE.ANDROID)
-      return
-
-    const win = window as unknown as ExtendedWindow
-    const androidObj = win.fromAndroid
-    if (!androidObj?.[methodName] || typeof androidObj[methodName] !== 'function')
-      return
-
-    this.registerAndroidMethod(methodName)
-    this.log(`动态注册: ${methodName}`)
-  }
-
-  private async executeMethod(
-    config: MethodConfig,
-    data?: any,
-    callback?: MethodCallback
-  ): Promise<CallResult> {
-    switch (this.platformType) {
-      case PLATFORM_TYPE.IOS: {
-        return this.callIosMethod(config, data, callback)
-      }
-      case PLATFORM_TYPE.ANDROID: {
-        return this.callAndroidMethod(config, data, callback)
-      }
-      default: {
-        const error = 'Not in app environment'
-        callback?.(null, error)
-        return { success: false, error }
-      }
+    if (this.platformType === PLATFORM_TYPE.ANDROID) {
+      const win = window as unknown as ExtendedWindow
+      const androidObj = win.fromAndroid
+      if (!androidObj?.[methodName] || typeof androidObj[methodName] !== 'function')
+        return
+      this.log(`✅ 动态注册 Android 方法: ${methodName}`)
+      this.registerMethod(methodName)
     }
-  }
-
-  private async callIosMethod(
-    config: MethodConfig,
-    data?: any,
-    callback?: MethodCallback
-  ): Promise<CallResult> {
-    return this.createPromiseWithCallback((resolve, cb) => {
-      this.setupWKWebViewJavascriptBridge((bridge) => {
-        try {
-          bridge.callHandler(config.name, data, (result: any) => {
-            cb?.(result)
-            callback?.(result)
-            resolve({ success: true, data: result })
-          })
-        }
-        catch (error) {
-          const errorMsg = error instanceof Error ? error.message : String(error)
-          this.logError(`iOS 调用失败: ${config.name}`, error)
-          cb?.(null)
-          callback?.(null)
-          resolve({ success: false, error: errorMsg })
-        }
-      })
-    }, callback)
-  }
-
-  private async callAndroidMethod(
-    config: MethodConfig,
-    data?: any,
-    callback?: MethodCallback
-  ): Promise<CallResult> {
-    return this.createPromiseWithCallback((resolve) => {
-      const handleError = (error: string) => {
-        callback?.(null, error)
-        resolve({ success: false, error })
-      }
-
-      try {
-        const win = window as unknown as ExtendedWindow
-        const androidObj = win.fromAndroid
-        if (!androidObj) {
-          return handleError('Android bridge not available')
-        }
-
-        const actualMethodName = config.androidMethod || config.name
-        const androidMethod = androidObj[actualMethodName]
-
-        if (!androidMethod || typeof androidMethod !== 'function') {
-          return handleError(`Android method ${actualMethodName} not found`)
-        }
-
-        const hasPayload = data !== undefined && data !== null
-        const jsonData = hasPayload ? JSON.stringify(data) : undefined
-        const invoke = () => (hasPayload ? androidMethod(jsonData) : androidMethod())
-
-        if (config.isSync) {
-          const result = invoke()
-          callback?.(result)
-          resolve({ success: true, data: result })
-          return
-        }
-
-        if (callback) {
-          win.androidCallback = (result: any) => {
-            callback?.(result)
-            resolve({ success: true, data: result })
-          }
-        }
-        else {
-          resolve({ success: true })
-        }
-        invoke()
-      }
-      catch (error) {
-        const errorMsg = error instanceof Error ? error.message : String(error)
-        this.logError(`Android 调用失败: ${config.name}`, error)
-        handleError(errorMsg)
-      }
-    }, callback)
-  }
-
-  registerHandler(eventName: string, callback: (data?: any) => void): void {
-    if (this.platformType !== PLATFORM_TYPE.IOS) {
-      console.warn('registerHandler is only supported on iOS')
-      return
+    else if (this.platformType === PLATFORM_TYPE.IOS) {
+      /**
+       * iOS 平台无法像 Android 那样通过 window.fromAndroid 预先验证方法是否存在
+       * WKWebViewJavascriptBridge 基于消息通道，只能在调用时才知道方法是否可用
+       * 如果原生方法不存在，h5调用会一直不响应直到自动超时，而不是立即返回错误
+       */
+      this.log(
+        `⚠️ 动态注册 iOS 方法: "${methodName}"（无法验证原生是否存在，调用可能超时）`
+      )
+      this.registerMethod(methodName)
     }
-
-    this.setupWKWebViewJavascriptBridge((bridge) => {
-      bridge.registerHandler(eventName, callback)
-    })
   }
 
   getRegisteredMethods(): string[] {
@@ -434,7 +566,27 @@ class MalanAppBridge {
     return this.platformType
   }
 
+  clearQueue(): void {
+    this.callQueue.forEach((item) => {
+      item.callback?.(null, 'Queue cleared')
+      item.resolve({ success: false, error: 'Queue cleared' })
+    })
+
+    this.callbackMap.forEach((info) => {
+      info.callback?.(null, 'Queue cleared')
+      info.resolve({ success: false, error: 'Queue cleared' })
+    })
+
+    this.callQueue = []
+    this.callbackMap.clear()
+    this.isProcessing = false
+
+    this.log('队列已清空')
+  }
+
   destroy(): void {
+    this.clearQueue()
+
     Object.values(this.eventMap).forEach(callbacks => callbacks.clear())
     this.eventMap = {}
     this.methodConfigs.clear()
@@ -442,4 +594,4 @@ class MalanAppBridge {
 }
 export default MalanAppBridge
 export { MalanAppBridge, PLATFORM_TYPE }
-export type { MethodConfig, CallResult, MalanAppConfig, AppEventName, PlatformType, CallOptions }
+export type { MethodConfig, MethodResult, MalanAppConfig, AppEventName, PlatformType, CallOptions }

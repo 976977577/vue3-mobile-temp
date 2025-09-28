@@ -49,14 +49,10 @@ onMounted(async () => {
       await userStore.refresh()
     }
 
-    const appInfo = await appStore.initAppInfo()
-    console.log('🚀 ~ appInfo:', appInfo)
-    // window.malanApp.on('onPageShow', (...args: any[]) => {
-    //   console.log('🚀 ~ onPageShow ~ appInfo:', args)
-    // })
+    appStore.initAppInfo()
   }
   catch (error) {
-    console.error('App mounted 钩子执行失败:', error)
+    console.error('App mounted:', error)
   }
 })
 </script>
