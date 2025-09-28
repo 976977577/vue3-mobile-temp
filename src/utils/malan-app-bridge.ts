@@ -61,7 +61,6 @@ interface CallResult {
 }
 
 interface CallOptions {
-  /** 是否为同步方法，true=同步，false=异步，未配置默认false */
   isSync?: boolean
 }
 
@@ -92,11 +91,11 @@ class MalanAppBridge {
   private log(message: string, ...args: any[]): void {
     if (!this.debug)
       return
-    console.log(`[MalanApp] ${message}`, ...args)
+    console.log(`[MalanApp] 😄 ${message}`, ...args)
   }
 
   private logError(message: string, error?: any): void {
-    console.error(`[MalanApp] ${message}`, error)
+    console.error(`[MalanApp] 😭 ${message}`, error)
   }
 
   private setupWKWebViewJavascriptBridge(callback: BridgeCallback): void {
@@ -143,7 +142,7 @@ class MalanAppBridge {
   private initGlobalObjects(): void {
     if (typeof window === 'undefined')
       return
-
+    console.log('[MalanApp] 初始化全局对象')
     const win = window as unknown as ExtendedWindow
     win.fromWeb = win.fromWeb || {}
     win.androidCallback = win.androidCallback || (() => {})
@@ -185,12 +184,15 @@ class MalanAppBridge {
     if (!androidObj)
       return
 
-    for (const methodName in androidObj) {
-      if (typeof androidObj[methodName] !== 'function')
-        continue
+    const methodNames = Object.keys(androidObj).filter(
+      name => typeof androidObj[name] === 'function'
+    )
 
-      this.registerAndroidMethod(methodName)
-    }
+    if (!methodNames.length)
+      return
+
+    methodNames.forEach(name => this.registerAndroidMethod(name))
+    this.log('检测到 Android 方法', methodNames.length, '个:', methodNames)
   }
 
   private registerAndroidMethod(methodName: string): void {
@@ -201,7 +203,6 @@ class MalanAppBridge {
     }
 
     this.methodConfigs.set(methodName, config)
-    this.log(`检测到方法: ${methodName}`)
   }
 
   on(eventName: AppEventName, callback: EventCallback): void {
@@ -237,26 +238,33 @@ class MalanAppBridge {
   }
 
   callMethod(methodName: string): Promise<CallResult>
-  callMethod(methodName: string, data: any): Promise<CallResult>
+  callMethod<T>(methodName: string, data: T): Promise<CallResult>
   callMethod(methodName: string, callback: MethodCallback): Promise<CallResult>
   callMethod(methodName: string, options: CallOptions): Promise<CallResult>
-  callMethod(methodName: string, data: any, callback: MethodCallback): Promise<CallResult>
-  callMethod(methodName: string, data: any, options: CallOptions): Promise<CallResult>
+  callMethod<T>(methodName: string, data: T, callback: MethodCallback): Promise<CallResult>
+  callMethod<T>(methodName: string, data: T, options: CallOptions): Promise<CallResult>
   callMethod(methodName: string, callback: MethodCallback, options: CallOptions): Promise<CallResult>
-  callMethod(methodName: string, data: any, callback: MethodCallback, options: CallOptions): Promise<CallResult>
+  callMethod<T>(
+    methodName: string,
+    data: T,
+    callback: MethodCallback,
+    options: CallOptions
+  ): Promise<CallResult>
   async callMethod(
     methodName: string,
-    ...args: [any?, MethodCallback?, CallOptions?]
+    dataOrCallbackOrOptions?: any | MethodCallback | CallOptions,
+    callbackOrOptions?: MethodCallback | CallOptions,
+    options?: CallOptions
   ): Promise<CallResult> {
     let data: any
     let callback: MethodCallback | undefined
     let finalOptions: CallOptions | undefined
 
-    // 参数解析
-    for (const arg of args) {
-      if (arg === undefined)
-        continue
+    const args = [dataOrCallbackOrOptions, callbackOrOptions, options].filter(
+      arg => arg !== undefined
+    )
 
+    for (const arg of args) {
       if (typeof arg === 'function') {
         callback = arg
       }
