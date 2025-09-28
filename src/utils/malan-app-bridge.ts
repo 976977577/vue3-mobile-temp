@@ -121,7 +121,6 @@ class MalanAppBridge {
     console.error(`[MalanApp] 😭 ${message}`, error)
   }
 
-  // 生成唯一的调用 ID
   private generateCallId(): string {
     if (typeof crypto !== 'undefined' && crypto.randomUUID) {
       return crypto.randomUUID()
@@ -132,22 +131,14 @@ class MalanAppBridge {
   // 清理超时的回调
   private cleanupTimeoutCallbacks(): void {
     const now = Date.now()
-    const timeoutCallbacks: string[] = []
 
-    this.callbackMap.forEach((info, callId) => {
-      if (now - info.timestamp > this.queueTimeout) {
-        timeoutCallbacks.push(callId)
-      }
-    })
-
-    timeoutCallbacks.forEach((callId) => {
-      const info = this.callbackMap.get(callId)
-      if (info) {
+    Array.from(this.callbackMap.entries())
+      .filter(([, info]) => now - info.timestamp > this.queueTimeout)
+      .forEach(([callId, info]) => {
         info.callback?.(null, 'Call timeout')
         info.resolve({ success: false, error: 'Call timeout' })
         this.callbackMap.delete(callId)
-      }
-    })
+      })
   }
 
   private async processNextInQueue(): Promise<void> {
@@ -218,7 +209,6 @@ class MalanAppBridge {
     }
   }
 
-  // iOS 平台直接调用
   private async callIosMethodDirectly(
     callId: string,
     config: MethodConfig,
@@ -242,7 +232,6 @@ class MalanAppBridge {
     })
   }
 
-  // Android 平台直接调用
   private async callAndroidMethodDirectly(
     callId: string,
     config: MethodConfig,
