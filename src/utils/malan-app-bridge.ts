@@ -535,7 +535,7 @@ class MalanAppBridge {
        * 如果原生方法不存在，h5调用会一直不响应直到自动超时，而不是立即返回错误
        */
       this.log(
-        `⚠️ 动态注册 iOS 方法: "${methodName}"（无法验证原生是否存在，调用可能超时）`
+        `✅ 动态注册 iOS 方法: "${methodName}"`
       )
       this.registerMethod(methodName)
     }
