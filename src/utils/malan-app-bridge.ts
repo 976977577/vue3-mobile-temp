@@ -421,20 +421,6 @@ class MalanAppBridge {
     this.methodConfigs.clear()
   }
 }
-
-// 默认实例
-const malanApp = new MalanAppBridge({ autoDetect: true })
-
-// 自动挂载到 window 对象（只读）
-if (typeof window !== 'undefined' && !window.malanApp) {
-  Object.defineProperty(window, 'malanApp', {
-    value: malanApp,
-    writable: false,
-    configurable: false,
-    enumerable: true
-  })
-}
-
-export default malanApp
+export default MalanAppBridge
 export { MalanAppBridge, PLATFORM_TYPE }
 export type { MethodConfig, CallResult, MalanAppConfig, AppEventName, PlatformType, CallOptions }

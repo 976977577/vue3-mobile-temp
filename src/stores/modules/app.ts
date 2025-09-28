@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import malanApp from '@/utils/malan-app-bridge'
+import { useMalanApp } from '@/composables/useMalanApp'
 
 export interface AppInfo {
   version: string // 应用版本
@@ -23,6 +23,7 @@ const defaultAppInfo: AppInfo = {
 const useAppStore = defineStore(
   'app',
   () => {
+    const malanApp = useMalanApp()
     const appInfo = ref<AppInfo>({ ...defaultAppInfo })
 
     const setAppInfo = (info: Partial<AppInfo>) => {
