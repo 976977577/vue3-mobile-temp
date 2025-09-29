@@ -1,0 +1,22 @@
+/**
+ * 字体统一导出文件
+ * 包含 HarmonyOS Sans SC 字体的不同字重版本
+ */
+
+/* HarmonyOS Sans SC Thin 字重 */
+@import './HarmonyOS_Sans_SC_Thin/font.css';
+
+/* HarmonyOS Sans SC Regular 字重 */
+@import './HarmonyOS_Sans_SC_Regular/font.css';
+
+/* HarmonyOS Sans SC Medium 字重 */
+@import './HarmonyOS_Sans_SC_Medium/font.css';
+
+/* HarmonyOS Sans SC Bold 字重 */
+@import './HarmonyOS_Sans_SC_Bold/font.css';
+
+/* HarmonyOS Sans SC Black 字重 */
+@import './HarmonyOS_Sans_SC_Black/font.css';
+
+/* HarmonyOS Sans SC Light 字重 */
+@import './HarmonyOS_Sans_SC_Light/font.css';
