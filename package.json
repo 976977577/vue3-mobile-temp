@@ -18,8 +18,7 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit",
     "commitlint": "commitlint --edit",
-    "prepare": "simple-git-hooks",
-    "font:slice": "tsx scripts/font-slice.ts"
+    "prepare": "simple-git-hooks"
   },
   "dependencies": {
     "@unhead/vue": "2.0.14",
@@ -48,7 +47,6 @@
     "esbuild": "^0.25.10",
     "eslint": "^9.34.0",
     "eslint-plugin-format": "^1.0.1",
-    "font-slice": "^1.0.2",
     "less": "^4.4.1",
     "lint-staged": "^16.1.5",
     "picocolors": "^1.1.1",
