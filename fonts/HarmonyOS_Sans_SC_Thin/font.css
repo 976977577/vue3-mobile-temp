@@ -2,7 +2,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.1.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -11,7 +11,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.2.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -20,7 +20,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.3.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -30,7 +30,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.4.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -45,7 +45,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.5.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -60,7 +60,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.6.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -77,7 +77,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.7.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -93,7 +93,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.8.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -110,7 +110,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.9.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -125,7 +125,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.10.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -137,7 +137,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.11.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -148,7 +148,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.12.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -162,7 +162,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.13.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -178,7 +178,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.14.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -194,7 +194,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.15.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -210,7 +210,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.16.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -227,7 +227,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.17.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -243,7 +243,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.18.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -260,7 +260,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.19.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -277,7 +277,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.20.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -294,7 +294,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.21.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -311,7 +311,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.22.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -328,7 +328,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.23.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -343,7 +343,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.24.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -359,7 +359,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.25.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -374,7 +374,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.26.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -389,7 +389,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.27.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -404,7 +404,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.28.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -418,7 +418,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.29.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -433,7 +433,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.30.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -446,7 +446,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.31.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -462,7 +462,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.32.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -478,7 +478,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.33.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -493,7 +493,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.34.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -508,7 +508,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.35.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -523,7 +523,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.36.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -538,7 +538,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.37.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -553,7 +553,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.38.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -569,7 +569,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.39.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -586,7 +586,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.40.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -601,7 +601,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.41.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -617,7 +617,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.42.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -632,7 +632,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.43.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -647,7 +647,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.44.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -663,7 +663,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.45.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -678,7 +678,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.46.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -694,7 +694,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.47.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -710,7 +710,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.48.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -726,7 +726,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.49.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -741,7 +741,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.50.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -757,7 +757,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.51.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -773,7 +773,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.52.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -789,7 +789,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.53.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -805,7 +805,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.54.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -821,7 +821,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.55.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -837,7 +837,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.56.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -852,7 +852,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.57.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -868,7 +868,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.58.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -884,7 +884,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.59.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -899,7 +899,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.60.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -913,7 +913,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.61.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -927,7 +927,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.62.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -942,7 +942,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.63.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -958,7 +958,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.64.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -974,7 +974,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.65.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -990,7 +990,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.66.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1005,7 +1005,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.67.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1020,7 +1020,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.68.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1032,7 +1032,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.69.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1043,7 +1043,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.70.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range: U+2465-2469, U+2474-249b, U+2500-2509, U+250b-2526, U+2528-2534, U+2536, U+2537, U+253b-2548, U+254a;
@@ -1051,7 +1051,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.71.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1063,7 +1063,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.72.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1075,7 +1075,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.73.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1085,7 +1085,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.74.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1095,7 +1095,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.75.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1107,7 +1107,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.76.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1129,7 +1129,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.77.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1150,7 +1150,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.78.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1171,7 +1171,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.79.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1193,7 +1193,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.80.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1215,7 +1215,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.81.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1237,7 +1237,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.82.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1259,7 +1259,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.83.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1281,7 +1281,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.84.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1303,7 +1303,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.85.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1325,7 +1325,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.86.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1347,7 +1347,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.87.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1369,7 +1369,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.88.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1391,7 +1391,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.89.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1413,7 +1413,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.90.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1435,7 +1435,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.91.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1457,7 +1457,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.92.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1479,7 +1479,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.93.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1501,7 +1501,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.94.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1522,7 +1522,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.95.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
@@ -1533,7 +1533,7 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
   src: url('./HarmonyOS_Sans_SC_Thin.96.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
   unicode-range:
