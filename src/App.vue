@@ -6,6 +6,7 @@ import { useUrlSearchParams } from '@vueuse/core'
 import { useAppStore, useRouteCacheStore, useUserStore } from '@/stores'
 import { appDescription, appName } from './constants'
 import { getToken, setToken } from '@/utils/auth'
+// import { enableVConsole } from './utils/vconsole'
 
 useHead({
   title: () => appName(),
@@ -48,7 +49,21 @@ onMounted(async () => {
     if (token || getToken()) {
       await userStore.refresh()
     }
-
+    // enableVConsole({
+    //   whitelist: [
+    //     '13297328264',
+    //     '13907310047',
+    //     '13907310045',
+    //     '17879524024',
+    //     '13018466488',
+    //     '13907310049',
+    //     '13524220689',
+    //     '18673660979',
+    //     '18684946072',
+    //     '18673701575',
+    //     '15989460874'
+    //   ]
+    // })
     appStore.initAppInfo()
   }
   catch (error) {

@@ -8,10 +8,9 @@ import Components from 'unplugin-vue-components/vite'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import progress from 'vite-plugin-progress'
 import { bundleAnalyzer } from './bundle-analyzer'
-import { createViteVConsole } from './vconsole'
 import { preloadErrorHandler } from './preload-error-handler'
 
-export function createVitePlugins(mode: string) {
+export function createVitePlugins() {
   return [
     // https://github.com/jeddygong/vite-plugin-progress
     progress(),
@@ -53,9 +52,6 @@ export function createVitePlugins(mode: string) {
     // https://github.com/antfu/unocss
     // see uno.config.ts for config
     UnoCSS(),
-
-    // https://github.com/vadxq/vite-plugin-vconsole
-    createViteVConsole(mode),
 
     // 预加载错误处理插件
     preloadErrorHandler(),
