@@ -88,7 +88,7 @@ function goBack() {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 
   .content {
-    padding: 20px;
+    padding: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -98,18 +98,18 @@ function goBack() {
 
   .error-section {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 80px;
 
     .error-icon {
-      margin-bottom: 20px;
+      margin-bottom: 40px;
     }
 
     .error-code {
-      font-size: 72px;
+      font-size: 144px;
       font-weight: bold;
       color: #ff6b6b;
-      margin: 0 0 10px 0;
-      text-shadow: 0 2px 4px rgba(255, 107, 107, 0.3);
+      margin: 0 0 20px 0;
+      text-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
       position: relative;
 
       &.glitch {
@@ -140,14 +140,14 @@ function goBack() {
     }
 
     .error-title {
-      font-size: 24px;
+      font-size: 48px;
       font-weight: 600;
       color: #333;
-      margin: 0 0 10px 0;
+      margin: 0 0 20px 0;
     }
 
     .error-message {
-      font-size: 16px;
+      font-size: 32px;
       color: #666;
       margin: 0;
       line-height: 1.5;
@@ -156,33 +156,33 @@ function goBack() {
 
   .suggestions {
     width: 100%;
-    max-width: 320px;
-    margin-bottom: 40px;
+    max-width: 640px;
+    margin-bottom: 80px;
 
     .suggestion-item {
       display: flex;
       align-items: center;
-      padding: 12px 16px;
-      margin-bottom: 8px;
+      padding: 24px 32px;
+      margin-bottom: 16px;
       background: rgba(255, 255, 255, 0.8);
-      border-radius: 8px;
+      border-radius: 16px;
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.3);
 
       span {
-        margin-left: 8px;
+        margin-left: 16px;
         color: #666;
-        font-size: 14px;
+        font-size: 28px;
       }
     }
   }
 
   .actions {
     width: 100%;
-    max-width: 280px;
+    max-width: 560px;
 
     .mt-3 {
-      margin-top: 12px;
+      margin-top: 24px;
     }
   }
 }
@@ -195,22 +195,22 @@ function goBack() {
     transform: translate(0);
   }
   87% {
-    transform: translate(-2px, 1px);
+    transform: translate(-4px, 2px);
   }
   89% {
-    transform: translate(2px, -1px);
+    transform: translate(4px, -2px);
   }
   91% {
-    transform: translate(-1px, -2px);
+    transform: translate(-2px, -4px);
   }
   93% {
-    transform: translate(1px, 2px);
+    transform: translate(2px, 4px);
   }
   95% {
-    transform: translate(-2px, -1px);
+    transform: translate(-4px, -2px);
   }
   97% {
-    transform: translate(2px, 1px);
+    transform: translate(4px, 2px);
   }
 }
 
@@ -222,27 +222,27 @@ function goBack() {
     opacity: 0.8;
   }
   87% {
-    transform: translate(-3px, 2px);
+    transform: translate(-6px, 4px);
     opacity: 0.9;
   }
   89% {
-    transform: translate(3px, -2px);
+    transform: translate(6px, -4px);
     opacity: 0.6;
   }
   91% {
-    transform: translate(-2px, -3px);
+    transform: translate(-4px, -6px);
     opacity: 0.8;
   }
   93% {
-    transform: translate(2px, 3px);
+    transform: translate(4px, 6px);
     opacity: 0.9;
   }
   95% {
-    transform: translate(-3px, -1px);
+    transform: translate(-6px, -2px);
     opacity: 0.7;
   }
   97% {
-    transform: translate(3px, 1px);
+    transform: translate(6px, 2px);
     opacity: 0.8;
   }
 }
@@ -255,27 +255,27 @@ function goBack() {
     opacity: 0.8;
   }
   87% {
-    transform: translate(3px, -2px);
+    transform: translate(6px, -4px);
     opacity: 0.6;
   }
   89% {
-    transform: translate(-3px, 2px);
+    transform: translate(-6px, 4px);
     opacity: 0.9;
   }
   91% {
-    transform: translate(2px, 3px);
+    transform: translate(4px, 6px);
     opacity: 0.7;
   }
   93% {
-    transform: translate(-2px, -3px);
+    transform: translate(-4px, -6px);
     opacity: 0.8;
   }
   95% {
-    transform: translate(3px, 1px);
+    transform: translate(6px, 2px);
     opacity: 0.9;
   }
   97% {
-    transform: translate(-3px, -1px);
+    transform: translate(-6px, -2px);
     opacity: 0.6;
   }
 }
