@@ -8,6 +8,34 @@ import setPageTitle from '@/utils/set-page-title'
 
 // 路由配置
 const routes: RouteRecordRaw[] = [
+  // 商家评价管理相关路由
+  {
+    path: '/merchant/reviews',
+    name: 'CustomerReviews',
+    component: () => import('@/pages/merchant/CustomerReviews.vue'),
+    meta: {
+      title: '顾客评价列表',
+      keepAlive: true
+    }
+  },
+  {
+    path: '/merchant/review/:id',
+    name: 'ReviewDetail',
+    component: () => import('@/pages/merchant/ReviewDetail.vue'),
+    meta: {
+      title: '评价详情',
+      keepAlive: false
+    }
+  },
+  {
+    path: '/merchant/reply-review/:id',
+    name: 'ReplyReview',
+    component: () => import('@/pages/merchant/ReplyReview.vue'),
+    meta: {
+      title: '回复评价',
+      keepAlive: false
+    }
+  },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',

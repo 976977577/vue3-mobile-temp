@@ -42,8 +42,8 @@ const props = withDefaults(defineProps<NavBarProps>(), {
   placeholder: true,
   clickable: true,
   zIndex: 1,
-  border: true,
-  transparent: true,
+  border: false,
+  transparent: false,
   customStyle: () => ({}),
   customClass: '',
   enableDefaultBack: true,
@@ -128,7 +128,7 @@ function handleClickRight(event: MouseEvent) {
 .malan-nav-bar {
   span {
     font-weight: 600;
-    font-size: 36px;
+    font-size: 34px;
     color: #151515;
   }
   &.malan-nav-bar--transparent {
