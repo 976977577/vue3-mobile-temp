@@ -1,50 +1,118 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import type { CSSProperties } from 'vue'
+import { useRouter } from 'vue-router'
 
-const route = useRoute()
+export interface NavBarProps {
+  /** 导航栏标题 */
+  title?: string
+  /** 是否固定在顶部 */
+  fixed?: boolean
+  /** 是否显示左侧返回箭头 */
+  leftArrow?: boolean
+  /** 左侧文本 */
+  leftText?: string
+  /** 右侧文本 */
+  rightText?: string
+  /** 是否显示占位符 */
+  placeholder?: boolean
+  /** 是否可点击 */
+  clickable?: boolean
+  /** z-index 层级 */
+  zIndex?: number
+  /** 是否显示底部边框 */
+  border?: boolean
+  /** 自定义样式 */
+  customStyle?: CSSProperties
+  /** 自定义类名 */
+  customClass?: string
+  /** 是否启用默认返回行为 */
+  enableDefaultBack?: boolean
+  /** 是否开启顶部安全区域 */
+  safeAreaInsetTop?: boolean
+}
+
+const props = withDefaults(defineProps<NavBarProps>(), {
+  title: '',
+  fixed: true,
+  leftArrow: true,
+  leftText: '',
+  rightText: '',
+  placeholder: true,
+  clickable: true,
+  zIndex: 1,
+  border: true,
+  customStyle: () => ({}),
+  customClass: '',
+  enableDefaultBack: true,
+  safeAreaInsetTop: true
+})
+
+const emit = defineEmits<{
+  clickLeft: [event: MouseEvent]
+  clickRight: [event: MouseEvent]
+}>()
+
 const router = useRouter()
 
 /**
- * 获取页面标题
+ * 处理左侧点击事件
  */
-const title = computed(() => {
-  const pageNames: Record<string, string> = {
-    // 可以根据新的页面添加标题映射
-  }
+function handleClickLeft(event: MouseEvent) {
+  emit('clickLeft', event)
 
-  if (route.name && typeof route.name === 'string') {
-    return pageNames[route.name] || route.name
+  // 如果启用默认返回行为且没有被阻止
+  if (props.enableDefaultBack && !event.defaultPrevented) {
+    if (window.history.state?.back) {
+      history.back()
+    }
+    else {
+      router.replace('/')
+    }
   }
+}
 
-  return '未定义'
-})
-
-/**
- * 显示左箭头
- * 由于 rootRouteList 已删除，默认显示返回箭头
- */
-const showLeftArrow = computed(() => {
-  // 可以根据需要自定义显示逻辑
-  return true
-})
-
-function onBack() {
-  if (window.history.state.back) {
-    history.back()
-  }
-  else {
-    router.replace('/')
-  }
+function handleClickRight(event: MouseEvent) {
+  emit('clickRight', event)
 }
 </script>
 
 <template>
   <VanNavBar
-    :title="title"
-    :fixed="true"
-    :left-arrow="showLeftArrow"
-    placeholder clickable
-    @click-left="onBack"
-  />
+    class="malan-nav-bar"
+    :title="props.title"
+    :fixed="props.fixed"
+    :left-arrow="props.leftArrow"
+    :left-text="props.leftText"
+    :right-text="props.rightText"
+    :placeholder="props.placeholder"
+    :clickable="props.clickable"
+    :z-index="props.zIndex"
+    :border="props.border"
+    :style="props.customStyle"
+    :class="props.customClass"
+    :safe-area-inset-top="props.safeAreaInsetTop"
+    @click-left="handleClickLeft"
+    @click-right="handleClickRight"
+  >
+    <!-- 左侧插槽 -->
+    <template v-if="props.leftArrow" #left>
+      <slot name="left" />
+    </template>
+
+    <!-- 标题插槽 -->
+    <template v-if="props.title" #title>
+      <slot name="title" />
+    </template>
+
+    <!-- 右侧插槽 -->
+    <template v-if="props.rightText" #right>
+      <slot name="right" />
+    </template>
+  </VanNavBar>
 </template>
+
+<style scoped lang="less">
+.malan-nav-bar {
+  background-color: red;
+}
+</style>

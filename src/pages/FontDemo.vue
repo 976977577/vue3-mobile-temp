@@ -4,10 +4,8 @@
 
 <template>
   <div class="font-demo">
-    <van-nav-bar title="字体切片演示" left-arrow @click-left="$router.back()" />
-    <div class="test">
-      你还计划临时决定立刻发货
-    </div>
+    <NavBar title="字体切片演示1" left-arrow @click-left="$router.back()" />
+
     <div class="demo-content">
       <van-cell-group title="HarmonyOS Sans 字体演示">
         <van-cell>

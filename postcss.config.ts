@@ -15,7 +15,7 @@ export default {
     // https://github.com/wswmsword/postcss-mobile-forever
     'postcss-mobile-forever': {
       appSelector: '#app',
-      viewportWidth: file => file.includes('vant') ? 375 : 750,
+      viewportWidth: file => /vant|vite-plugin-vue-devtools/.test(file) ? 375 : 750,
       maxDisplayWidth: 600,
       border: true,
       rootContainingBlockSelectorList
