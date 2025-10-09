@@ -4,6 +4,8 @@ import App from '@/App.vue'
 import router from '@/router'
 import pinia from '@/stores'
 import MalanAppPlugin from '@/plugins/malan-app'
+import malanDialog from '@/components/MDialog/index'
+
 import 'virtual:uno.css'
 import '@/styles/app.less'
 import '@/styles/var.less'
@@ -20,6 +22,8 @@ import 'vant/es/toast/style'
 import 'vant/es/dialog/style'
 import 'vant/es/notify/style'
 import 'vant/es/image-preview/style'
+
+window.malanDialog = malanDialog
 
 const app = createApp(App)
 const head = createHead()

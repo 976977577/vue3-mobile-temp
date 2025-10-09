@@ -1,5 +1,3 @@
-// 此文件不支持热更新，修改后需要重启生效
-
 // 需要转换的 fixed 选择器列表
 const rootContainingBlockSelectorList = [
   '.van-tabbar',
@@ -14,11 +12,10 @@ const rootContainingBlockSelectorList = [
 export default {
   plugins: {
     'autoprefixer': {},
-
     // https://github.com/wswmsword/postcss-mobile-forever
     'postcss-mobile-forever': {
       appSelector: '#app',
-      viewportWidth: 375,
+      viewportWidth: file => file.includes('vant') ? 375 : 750,
       maxDisplayWidth: 600,
       border: true,
       rootContainingBlockSelectorList
