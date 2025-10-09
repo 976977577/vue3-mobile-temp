@@ -9,15 +9,6 @@ import setPageTitle from '@/utils/set-page-title'
 // 路由配置
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
-    name: 'FontDemo',
-    component: () => import('@/pages/FontDemo.vue'),
-    meta: {
-      title: '字体切片演示',
-      keepAlive: false
-    }
-  },
-  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('@/pages/NotFound.vue'),
