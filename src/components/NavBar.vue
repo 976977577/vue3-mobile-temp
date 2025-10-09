@@ -21,6 +21,8 @@ export interface NavBarProps {
   zIndex?: number
   /** 是否显示底部边框 */
   border?: boolean
+  /** 背景是否透明 */
+  transparent?: boolean
   /** 自定义样式 */
   customStyle?: CSSProperties
   /** 自定义类名 */
@@ -41,6 +43,7 @@ const props = withDefaults(defineProps<NavBarProps>(), {
   clickable: true,
   zIndex: 1,
   border: true,
+  transparent: true,
   customStyle: () => ({}),
   customClass: '',
   enableDefaultBack: true,
@@ -79,6 +82,10 @@ function handleClickRight(event: MouseEvent) {
 <template>
   <VanNavBar
     class="malan-nav-bar"
+    :class="[
+      { 'malan-nav-bar--transparent': props.transparent },
+      props.customClass,
+    ]"
     :title="props.title"
     :fixed="props.fixed"
     :left-arrow="props.leftArrow"
@@ -87,32 +94,47 @@ function handleClickRight(event: MouseEvent) {
     :placeholder="props.placeholder"
     :clickable="props.clickable"
     :z-index="props.zIndex"
-    :border="props.border"
+    :border="props.border && !props.transparent"
     :style="props.customStyle"
-    :class="props.customClass"
     :safe-area-inset-top="props.safeAreaInsetTop"
     @click-left="handleClickLeft"
     @click-right="handleClickRight"
   >
     <!-- 左侧插槽 -->
-    <template v-if="props.leftArrow" #left>
-      <slot name="left" />
+    <template #left>
+      <slot name="left">
+        <van-icon v-if="props.leftArrow" name="arrow-left" color="#151515" size="20" />
+        <span v-if="props.leftText">{{ props.leftText }}</span>
+      </slot>
     </template>
 
     <!-- 标题插槽 -->
-    <template v-if="props.title" #title>
-      <slot name="title" />
+    <template #title>
+      <slot name="title">
+        <span v-if="props.title">{{ props.title }}</span>
+      </slot>
     </template>
 
     <!-- 右侧插槽 -->
-    <template v-if="props.rightText" #right>
-      <slot name="right" />
+    <template #right>
+      <slot name="right">
+        <span v-if="props.rightText">{{ props.rightText }}</span>
+      </slot>
     </template>
   </VanNavBar>
 </template>
 
 <style scoped lang="less">
 .malan-nav-bar {
-  background-color: red;
+  span {
+    font-weight: 600;
+    font-size: 36px;
+    color: #151515;
+  }
+  &.malan-nav-bar--transparent {
+    :deep(.van-nav-bar) {
+      background: transparent !important;
+    }
+  }
 }
 </style>
