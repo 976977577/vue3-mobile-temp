@@ -1,4 +1,4 @@
-import MDialog from './index.vue'
+import MlDialog from './index.vue'
 import type { DialogOptions } from './index.vue'
 import { createApp } from 'vue'
 
@@ -17,7 +17,7 @@ export default function (
     const div = document.createElement('div')
     const app = createApp(
       h(
-        MDialog,
+        MlDialog,
         {
           title: options.title,
           message: options.message,

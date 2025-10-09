@@ -1,4 +1,4 @@
-## showDialog 函数返回值
+## malanDialog 函数返回值
 
 函数返回一个 `Promise`，解析后会得到一个对象，包含用户的操作信息：
 
@@ -13,7 +13,7 @@
 ### 1. 基本使用
 
 ```ts
-const { confirm, cancel, close } = await showDialog({
+const { confirm, cancel, close } = await malanDialog({
   title: '确认操作',
   message: '你确定要执行此操作吗？',
   showClose: true
@@ -33,7 +33,7 @@ else if (result.close) {
 ### 2. 自定义按钮文本
 
 ```ts
-const { confirm } = await showDialog({
+const { confirm } = await malanDialog({
   title: '删除确认',
   message: '确定要删除此项吗？',
   confirmButtonText: '删除',
@@ -48,7 +48,7 @@ if (confirm) {
 ### 3. 监听事件
 
 ```ts
-showDialog({
+malanDialog({
   title: '信息',
   message: '这是一个带关闭按钮的对话框',
   showClose: true,
@@ -71,7 +71,7 @@ showDialog({
 import { h } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 // 第一种方式
-showDialog({
+malanDialog({
   title: '确认发布',
   slot: h('p', {
     innerHTML:
@@ -80,7 +80,7 @@ showDialog({
 })
 
 // 第二种方式
-showDialog({
+malanDialog({
   title: '确认发布',
   slot: HelloWorld
 })

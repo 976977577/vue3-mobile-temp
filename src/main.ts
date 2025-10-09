@@ -4,7 +4,7 @@ import App from '@/App.vue'
 import router from '@/router'
 import pinia from '@/stores'
 import MalanAppPlugin from '@/plugins/malan-app'
-import malanDialog from '@/components/MDialog/index'
+import malanDialog from '@/components/MlDialog/index'
 
 import 'virtual:uno.css'
 import '@/styles/app.less'
